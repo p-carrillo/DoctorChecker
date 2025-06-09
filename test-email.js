@@ -1,24 +1,25 @@
 require('dotenv').config();
 const EmailService = require('./src/services/emailService');
+const log = require('./src/utils/logger');
 
 async function testEmail() {
-  console.log('🧪 Iniciando prueba de envío de email a múltiples destinatarios...');
+  log.info('🧪 Iniciando prueba de envío de email a múltiples destinatarios...');
   
   const emailService = new EmailService();
   
   // Primero verificamos la conexión
-  console.log('📡 Verificando conexión SMTP...');
+  log.info('📡 Verificando conexión SMTP...');
   const connectionOk = await emailService.testConnection();
   
   if (!connectionOk) {
-    console.log('❌ Error: No se pudo conectar al servidor SMTP');
+    log.error('❌ Error: No se pudo conectar al servidor SMTP');
     return;
   }
-  
-  console.log('✅ Conexión SMTP exitosa');
+
+  log.success('✅ Conexión SMTP exitosa');
   
   // Ahora enviamos un email de prueba
-  console.log('📧 Enviando email de prueba a múltiples destinatarios...');
+  log.info('📧 Enviando email de prueba a múltiples destinatarios...');
   
   const testCupoInfo = {
     name: 'Dr. Test - Email Múltiple',
@@ -30,11 +31,11 @@ async function testEmail() {
   const emailSent = await emailService.sendDoctorAvailableNotification(testCupoInfo);
   
   if (emailSent) {
-    console.log('✅ Email de prueba enviado correctamente a múltiples destinatarios!');
+    log.success('✅ Email de prueba enviado correctamente a múltiples destinatarios!');
   } else {
-    console.log('❌ Error al enviar el email de prueba');
+    log.error('❌ Error al enviar el email de prueba');
   }
 }
 
 // Ejecutar la prueba
-testEmail().catch(console.error);
+testEmail().catch(err => log.error(err.message));

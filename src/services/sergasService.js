@@ -1,13 +1,7 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
 const config = require('../config/config');
-
-// Simple logger
-const log = {
-  info: (msg) => console.log(`[${new Date().toLocaleTimeString('es-ES')}] ${msg}`),
-  error: (msg) => console.error(`[${new Date().toLocaleTimeString('es-ES')}] ❌ ${msg}`),
-  success: (msg) => console.log(`[${new Date().toLocaleTimeString('es-ES')}] ✅ ${msg}`)
-};
+const log = require('../utils/logger');
 
 class SergasService {
   constructor() {
@@ -81,7 +75,7 @@ class SergasService {
         }
       }
       
-      console.log(`Parsed doctor info - Name: ${doctorName}, Estado: ${estado}`);
+      log.info(`Parsed doctor info - Name: ${doctorName}, Estado: ${estado}`);
       
       return {
         cupoId,
@@ -92,7 +86,7 @@ class SergasService {
       };
       
     } catch (error) {
-      console.error('Error parsing doctor info:', error.message);
+      log.error(`Error parsing doctor info: ${error.message}`);
       return null;
     }
   }
@@ -101,7 +95,7 @@ class SergasService {
     const availableCupos = [];
     
     for (const cupoId of config.sergas.doctorsToMonitor) {
-      console.log(`Checking cupo: ${cupoId}`);
+      log.info(`Checking cupo: ${cupoId}`);
       
       const cupoInfo = await this.checkCupoStatus(cupoId);
       if (cupoInfo) {

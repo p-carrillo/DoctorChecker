@@ -2,13 +2,7 @@ const cron = require('node-cron');
 const config = require('./config/config');
 const EmailService = require('./services/emailService');
 const SergasService = require('./services/sergasService');
-
-// Simple logger
-const log = {
-  info: (msg) => console.log(`[${new Date().toLocaleTimeString('es-ES')}] ${msg}`),
-  error: (msg) => console.error(`[${new Date().toLocaleTimeString('es-ES')}] ❌ ${msg}`),
-  success: (msg) => console.log(`[${new Date().toLocaleTimeString('es-ES')}] ✅ ${msg}`)
-};
+const log = require('./utils/logger');
 
 class DoctorChecker {
   constructor() {
