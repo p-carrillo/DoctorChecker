@@ -1,5 +1,6 @@
 const nodemailer = require('nodemailer');
 const config = require('../config/config');
+const log = require('../utils/logger');
 
 class EmailService {
   constructor() {
@@ -26,10 +27,10 @@ class EmailService {
 
     try {
       const info = await this.transporter.sendMail(mailOptions);
-      console.log(`Email sent successfully to: ${config.email.to.join(', ')}`);
+      log.info(`Email sent successfully to: ${config.email.to.join(', ')}`);
       return true;
     } catch (error) {
-      console.error('Failed to send email:', error.message);
+      log.error(`Failed to send email: ${error.message}`);
       return false;
     }
   }
@@ -69,10 +70,10 @@ class EmailService {
 
     try {
       const info = await this.transporter.sendMail(mailOptions);
-      console.log(`✅ Email de inicio enviado correctamente a: ${config.email.to.join(', ')}`);
+      log.success(`Email de inicio enviado correctamente a: ${config.email.to.join(', ')}`);
       return true;
     } catch (error) {
-      console.error('❌ Error al enviar email de inicio:', error.message);
+      log.error(`Error al enviar email de inicio: ${error.message}`);
       return false;
     }
   }
@@ -80,10 +81,10 @@ class EmailService {
   async testConnection() {
     try {
       await this.transporter.verify();
-      console.log('Email service connection verified');
+      log.info('Email service connection verified');
       return true;
     } catch (error) {
-      console.error('Email service connection failed:', error.message);
+      log.error(`Email service connection failed: ${error.message}`);
       return false;
     }
   }

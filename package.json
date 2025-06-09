@@ -16,7 +16,8 @@
     "cheerio": "^1.0.0-rc.12",
     "node-cron": "^3.0.3",
     "nodemailer": "^6.9.7",
-    "dotenv": "^16.3.1"
+    "dotenv": "^16.3.1",
+    "winston": "^3.11.0"
   },
   "devDependencies": {
     "nodemon": "^3.0.1",
