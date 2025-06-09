@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  doctor-checker:
+    build: .
+    container_name: doctor-checker
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+    env_file:
+      - .env
+    volumes:
+      - ./logs:/app/logs
+    networks:
+      - doctor-checker-network
+
+networks:
+  doctor-checker-network:
+    driver: bridge
