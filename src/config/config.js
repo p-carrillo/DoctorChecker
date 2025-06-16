@@ -18,7 +18,9 @@ module.exports = {
       }
     },
     from: process.env.FROM_EMAIL,
-    to: process.env.TO_EMAIL ? 
-      process.env.TO_EMAIL.split(',').map(email => email.trim()) : []
+    admins: process.env.ADMIN_EMAILS ?
+      process.env.ADMIN_EMAILS.split(',').map(email => email.trim()) : [],
+    users: process.env.USER_EMAILS ?
+      process.env.USER_EMAILS.split(',').map(email => email.trim()) : []
   }
 };

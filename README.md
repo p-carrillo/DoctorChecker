@@ -74,7 +74,8 @@ Create a `.env` file based on `.env.example` and configure the following variabl
 - `SMTP_SECURE`: Use SSL/TLS (default: false)
 - `SMTP_USER`: Your email address
 - `SMTP_PASS`: Your email password or app password
-- `TO_EMAIL`: Email address to receive notifications
+- `ADMIN_EMAILS`: Comma separated emails that will receive the startup notification
+- `USER_EMAILS`: Comma separated emails that will receive doctor status updates
 - `FROM_EMAIL`: Email address for sending notifications
 
 ### Gmail Setup

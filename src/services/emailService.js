@@ -10,7 +10,7 @@ class EmailService {
   async sendDoctorAvailableNotification(cupoInfo) {
     const mailOptions = {
       from: config.email.from,
-      to: config.email.to.join(', '), // Join all emails with comma
+      to: config.email.users.join(', '),
       subject: `🩺 CUPO DISPONIBLE: ${cupoInfo.name} - Estado: ${cupoInfo.estado}`,
       html: `
         <h2>¡El cupo ha cambiado de estado!</h2>
@@ -27,7 +27,7 @@ class EmailService {
 
     try {
       const info = await this.transporter.sendMail(mailOptions);
-      log.info(`Email sent successfully to: ${config.email.to.join(', ')}`);
+      log.info(`Email sent successfully to: ${config.email.users.join(', ')}`);
       return true;
     } catch (error) {
       log.error(`Failed to send email: ${error.message}`);
@@ -40,7 +40,7 @@ class EmailService {
     
     const mailOptions = {
       from: config.email.from,
-      to: config.email.to.join(', '),
+      to: config.email.admins.join(', '),
       subject: `🚀 Monitor SERGAS Iniciado - López Pan`,
       html: `
         <h2>🩺 Monitor SERGAS Activado</h2>
@@ -70,7 +70,7 @@ class EmailService {
 
     try {
       const info = await this.transporter.sendMail(mailOptions);
-      log.success(`Email de inicio enviado correctamente a: ${config.email.to.join(', ')}`);
+      log.success(`Email de inicio enviado correctamente a: ${config.email.admins.join(', ')}`);
       return true;
     } catch (error) {
       log.error(`Error al enviar email de inicio: ${error.message}`);

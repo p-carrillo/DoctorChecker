@@ -31,7 +31,8 @@ class DoctorChecker {
     }
 
     log.info(`Monitoreando: ${config.sergas.doctorsToMonitor.join(', ')} | Intervalo: ${config.sergas.checkInterval}min`);
-    log.info(`Emails: ${config.email.to.join(', ')}`);
+    log.info(`Admin emails: ${config.email.admins.join(', ')}`);
+    log.info(`User emails: ${config.email.users.join(', ')}`);
 
     // Send startup notification email
     const startupEmailSent = await this.emailService.sendStartupNotification(config.sergas.doctorsToMonitor);

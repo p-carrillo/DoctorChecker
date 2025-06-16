@@ -17,7 +17,8 @@ jest.mock('../src/config/config', () => ({
   email: {
     smtp: {},
     from: 'from@test.com',
-    to: ['to1@test.com', 'to2@test.com']
+    users: ['user1@test.com', 'user2@test.com'],
+    admins: ['admin@test.com']
   }
 }));
 
@@ -42,7 +43,7 @@ describe('EmailService', () => {
     expect(sendMailMock).toHaveBeenCalled();
     expect(sendMailMock.mock.calls[0][0]).toEqual(
       expect.objectContaining({
-        to: 'to1@test.com, to2@test.com',
+        to: 'user1@test.com, user2@test.com',
         from: 'from@test.com'
       })
     );
